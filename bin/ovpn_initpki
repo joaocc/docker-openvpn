@@ -16,7 +16,9 @@ source "$OPENVPN/ovpn_env.sh"
 nopass=$1
 
 # Provides a sufficient warning before erasing pre-existing files
-easyrsa init-pki
+if [ "${PKI_DIR_IS_MOUNT}" != "1" ]; then
+  easyrsa init-pki
+fi
 
 # CA always has a password for protection in event server is compromised. The
 # password is only needed to sign client/server certificates.  No password is
